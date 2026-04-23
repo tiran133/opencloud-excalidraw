@@ -24,12 +24,25 @@ services:
     volumes:
       - opencloud-config:/etc/opencloud
       - ./dev/docker/opencloud/apps.yaml:/etc/opencloud/apps.yaml
+      - ./dev/docker/opencloud/proxy.yaml:/etc/opencloud/proxy.yaml
       - ./dist:/web/apps/excalidraw
     depends_on:
       - traefik
 
+  excalidraw-collab:
+    build: ./collab-server
+    networks:
+      - opencloud-net
+    environment:
+      PORT: 3002
+      CORS_ORIGIN: '*'
+      PATH_PREFIX: '/excalidraw-collab/'
+      OIDC_ISSUER: ${OC_URL:-https://host.docker.internal:9200}
+      OC_URL: ${OC_URL:-https://host.docker.internal:9200}
+      NODE_TLS_REJECT_UNAUTHORIZED: '0'
+
   traefik:
-    image: traefik:v3.5.3
+    image: traefik:v3.6
     networks:
       opencloud-net:
         aliases:
@@ -71,13 +84,12 @@ services:
       traefik.http.middlewares.cors.headers.addvaryheader: true
     ports:
       - '9200:9200'
+      - '8080:8080'
     volumes:
       - './dev/docker/traefik/certificates:/certificates'
       - './dev/docker/traefik/configs:/configs'
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
-
 volumes:
   opencloud-config:
-
 networks:
   opencloud-net:

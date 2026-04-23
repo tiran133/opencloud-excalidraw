@@ -1,0 +1,70 @@
+/* ── Save button (next to hamburger menu, matches .dropdown-menu-button) ── */
+
+.excalidraw .excalidraw-save-button {
+  position: absolute;
+  left: 45px;
+  z-index: 6;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: var(--lg-button-size);
+  height: var(--lg-button-size);
+  box-sizing: border-box;
+  padding: 0.625rem;
+
+  border-radius: var(--border-radius-lg);
+
+  cursor: pointer;
+  background-color: var(--color-surface-low);
+  color: var(--color-on-surface);
+  font-family: var(--ui-font);
+
+  transition: opacity 0.15s;
+}
+
+.excalidraw .excalidraw-save-button svg {
+  width: var(--lg-icon-size);
+  height: var(--lg-icon-size);
+}
+
+.excalidraw .excalidraw-save-button:hover {
+  background-color: var(--color-surface-high);
+  text-decoration: none;
+}
+
+.excalidraw .excalidraw-save-button:active {
+  border-color: var(--color-primary);
+}
+
+/* Dark theme */
+.excalidraw.theme--dark .excalidraw-save-button {
+  background-color: var(--color-surface-high);
+}
+
+.excalidraw.theme--dark .excalidraw-save-button:hover {
+  background-color: #363541;
+}
+
+/* ── Active (dirty) state ── */
+.excalidraw .excalidraw-save-button--active {
+  color: var(--color-on-surface);
+  opacity: 1;
+}
+
+/* ── Disabled (clean) state ── */
+.excalidraw .excalidraw-save-button--disabled {
+  cursor: pointer;
+  color: #ced4da;
+}
+
+.excalidraw.theme--dark .excalidraw-save-button--disabled {
+  color: #dfe5eb;
+  background-color: var(--color-muted-background);
+  opacity: 0.7;
+}
+.excalidraw.theme--dark .excalidraw-save-button--disabled.excalidraw-save-button:hover {
+  color: #dfe5eb;
+  background-color: var(--color-muted-background);
+}

@@ -1,0 +1,104 @@
+.preferences-trigger {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.625rem;
+  gap: 0.75rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--color-on-surface);
+  position: relative;
+}
+
+.preferences-trigger:hover {
+  background-color: var(--island-bg-color-hover, rgba(0, 0, 0, 0.05));
+}
+
+.preferences-trigger__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.preferences-trigger__label {
+  flex: 1;
+  text-align: left;
+}
+
+.preferences-trigger__chevron {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.preferences-submenu-portal {
+  position: fixed;
+  min-width: 14rem;
+  background: var(--island-bg-color, #fff);
+  border-radius: 0.5rem;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  padding: 0.25rem 0;
+  z-index: 100000;
+}
+
+.preferences-submenu-portal.theme--dark {
+  --island-bg-color: #232329;
+  --color-on-surface: #ced4da;
+  --button-hover-bg: rgba(255, 255, 255, 0.1);
+  background: var(--island-bg-color);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+}
+
+.preferences-submenu-portal.theme--dark .preferences-submenu__item:hover {
+  background-color: var(--button-hover-bg);
+}
+
+.preferences-submenu__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.625rem;
+  gap: 0.5rem;
+  height: 2rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--color-on-surface);
+  white-space: nowrap;
+}
+
+.preferences-submenu__item:hover {
+  background-color: var(--island-bg-color-hover, rgba(0, 0, 0, 0.05));
+}
+
+.preferences-submenu__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.preferences-submenu__label {
+  flex: 1;
+  text-align: left;
+}
+
+.preferences-submenu__shortcut {
+  margin-left: auto;
+  font-size: 0.75rem;
+  opacity: 0.6;
+  padding-left: 1.5rem;
+}

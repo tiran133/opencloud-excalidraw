@@ -1,2 +1,4 @@
 excalidraw:
-  config: {}
+  config:
+    collabServerEnabled: true
+    collabServerUrl: ''

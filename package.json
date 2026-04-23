@@ -14,7 +14,8 @@
     "lint": "eslint 'src/**/*.{js,ts,vue,tsx}' --color",
     "format:check": "prettier . --check",
     "format:write": "prettier . --write",
-    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest"
+    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest",
+    "postinstall": "node scripts/patch-excalidraw-exports.cjs"
   },
   "devDependencies": {
     "@opencloud-eu/eslint-config": "^5.0.0",
@@ -22,6 +23,8 @@
     "@opencloud-eu/tsconfig": "^5.0.0",
     "@opencloud-eu/web-client": "^5.0.0",
     "@opencloud-eu/web-pkg": "^5.0.0",
+    "@types/lodash.escape": "^4.0.9",
+    "@types/lodash.throttle": "^4.1.9",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
@@ -44,9 +47,14 @@
   "dependencies": {
     "@excalidraw/excalidraw": "^0.18.0",
     "@opencloud-eu/extension-sdk": "^5.0.0",
+    "idb-keyval": "^6.2.2",
+    "lodash.escape": "^4.0.1",
+    "lodash.throttle": "^4.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "veaury": "^2.6.0"
+    "socket.io-client": "^4.8.3",
+    "veaury": "^2.6.0",
+    "zod": "^4.3.6"
   },
   "packageManager": "pnpm@10.18.1"
 }

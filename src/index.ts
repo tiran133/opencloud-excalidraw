@@ -12,6 +12,7 @@ import '@opencloud-eu/extension-sdk/tailwind.css'
 import { computed } from 'vue'
 import { useGettext } from 'vue3-gettext'
 import App from './App.vue'
+import translations from '../l10n/translations.json'
 
 const applicationId = 'excalidraw'
 
@@ -23,17 +24,18 @@ export default defineWebApplication({
     const spacesStore = useSpacesStore()
 
     const appInfo: ApplicationInformation = {
-      name: $gettext('Excalidraw'),
+      name: 'Whiteborad',
       id: applicationId,
       icon: 'pencil-ruler',
       color: '#6965db',
       defaultExtension: 'excalidraw',
+      translations,
       extensions: [
         {
           extension: 'excalidraw',
           routeName: 'excalidraw',
           newFileMenu: {
-            menuTitle: () => $gettext('Excalidraw Drawing')
+            menuTitle: () => $gettext('Whiteborad')
           }
         }
       ]
@@ -44,7 +46,8 @@ export default defineWebApplication({
         name: 'excalidraw',
         path: '/:driveAliasAndItem(.*)?',
         component: AppWrapperRoute(App, {
-          applicationId
+          applicationId,
+          disableAutoSave: true
         }),
         meta: {
           authContext: 'hybrid',

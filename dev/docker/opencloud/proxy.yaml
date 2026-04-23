@@ -1,0 +1,6 @@
+additional_policies:
+  - name: default
+    routes:
+      - endpoint: /excalidraw-collab/
+        backend: http://excalidraw-collab:3002
+        unprotected: true
