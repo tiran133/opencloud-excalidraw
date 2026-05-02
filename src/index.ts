@@ -24,7 +24,7 @@ export default defineWebApplication({
     const spacesStore = useSpacesStore()
 
     const appInfo: ApplicationInformation = {
-      name: 'Whiteborad',
+      name: 'Whiteboard',
       id: applicationId,
       icon: 'pencil-ruler',
       color: '#6965db',
@@ -35,7 +35,7 @@ export default defineWebApplication({
           extension: 'excalidraw',
           routeName: 'excalidraw',
           newFileMenu: {
-            menuTitle: () => $gettext('Whiteborad')
+            menuTitle: () => $gettext('Whiteboard')
           }
         }
       ]
