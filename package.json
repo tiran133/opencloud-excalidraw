@@ -14,8 +14,7 @@
     "lint": "eslint 'src/**/*.{js,ts,vue,tsx}' --color",
     "format:check": "prettier . --check",
     "format:write": "prettier . --write",
-    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest",
-    "postinstall": "node scripts/patch-excalidraw-exports.cjs"
+    "test:unit": "NODE_OPTIONS=--unhandled-rejections=throw vitest"
   },
   "devDependencies": {
     "@opencloud-eu/eslint-config": "^5.0.0",

@@ -4,9 +4,7 @@ import {
   Excalidraw,
   MainMenu,
   serializeAsJSON,
-  THEME,
-  // @ts-expect-error patched export – not in upstream type declarations
-  CommandPalette
+  THEME
 } from '@excalidraw/excalidraw'
 import '@excalidraw/excalidraw/index.css'
 import './ExcalidrawWrapper.css'
@@ -193,7 +191,6 @@ export default function ExcalidrawWrapper({
         <MainMenu>
           {!readOnly && <MainMenu.DefaultItems.Export />}
           <MainMenu.DefaultItems.SaveAsImage />
-          <MainMenu.DefaultItems.CommandPalette />
           <MainMenu.DefaultItems.SearchMenu />
           <MainMenu.DefaultItems.Help />
           {!readOnly && <MainMenu.DefaultItems.ClearCanvas />}
@@ -226,7 +223,6 @@ export default function ExcalidrawWrapper({
             </>
           )}
         </MainMenu>
-        <CommandPalette />
       </Excalidraw>
     </div>
   )
