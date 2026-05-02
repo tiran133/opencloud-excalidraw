@@ -7,7 +7,6 @@ ENV CI=true
 RUN npm install -g pnpm@10.18.1
 
 COPY package.json pnpm-lock.yaml ./
-COPY scripts ./scripts
 RUN pnpm install --frozen-lockfile
 
 COPY . .
