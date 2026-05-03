@@ -194,11 +194,11 @@ export class CollabManager {
     })
 
     this.socket.on('connect', () => {
-      console.log('[collab] connected')
+      console.log('[excalidraw-collab] connected')
     })
 
     this.socket.on('disconnect', (reason) => {
-      console.log(`[collab] disconnected (reason: ${reason})`)
+      console.log(`[excalidraw-collab] disconnected (reason: ${reason})`)
       this.socketInitialized = false
       this.collaborators = new Map()
       this.excalidrawAPI.updateScene({ collaborators: new Map() })
@@ -212,27 +212,27 @@ export class CollabManager {
 
     // Reconnection events are emitted on the Manager (socket.io), not the Socket
     this.socket.io.on('reconnect_attempt', (attempt: number) => {
-      console.log(`[collab] reconnect attempt #${attempt}`)
+      console.log(`[excalidraw-collab] reconnect attempt #${attempt}`)
       this.onCollabStateChange?.('reconnecting')
     })
 
     this.socket.io.on('reconnect', (attempt: number) => {
-      console.log(`[collab] reconnected after ${attempt} attempt(s)`)
+      console.log(`[excalidraw-collab] reconnected after ${attempt} attempt(s)`)
       // The server will re-emit 'init-room' on reconnect, which triggers
       // join-room → first-in-room / room-user-change → 'connected' state.
     })
 
     this.socket.io.on('reconnect_error', (err: Error) => {
-      console.warn('[collab] reconnect error:', err.message)
+      console.warn('[excalidraw-collab] reconnect error:', err.message)
     })
 
     this.socket.io.on('reconnect_failed', () => {
-      console.error('[collab] reconnect failed after maximum attempts')
+      console.error('[excalidraw-collab] reconnect failed after maximum attempts')
       this.onCollabStateChange?.('disconnected')
     })
 
     this.socket.on('connect_error', (err: Error) => {
-      console.warn('[collab] connect error:', err.message)
+      console.warn('[excalidraw-collab] connect error:', err.message)
     })
 
     // ─── Browser online/offline detection ─────────────────────────────
@@ -242,7 +242,7 @@ export class CollabManager {
     // user doesn't have to wait for the (potentially huge) backoff.
     this.handleOffline = () => {
       if (!this.socket || this.destroyed) return
-      console.log('[collab] browser went offline — pausing reconnection')
+      console.log('[excalidraw-collab] browser went offline — pausing reconnection')
       this.onCollabStateChange?.('offline')
       // Disconnect the manager so socket.io stops its internal retry
       // timer.  We'll reconnect manually when the network returns.
@@ -251,7 +251,7 @@ export class CollabManager {
 
     this.handleOnline = () => {
       if (!this.socket || this.destroyed) return
-      console.log('[collab] browser came back online — reconnecting immediately')
+      console.log('[excalidraw-collab] browser came back online — reconnecting immediately')
       this.onCollabStateChange?.('reconnecting')
       // Re-enable reconnection and force an immediate attempt.
       this.socket.io.reconnection(true)
@@ -266,12 +266,12 @@ export class CollabManager {
     window.addEventListener('offline', this.handleOffline)
 
     this.socket.on('init-room', () => {
-      console.log('[collab] init-room, joining', this.roomId)
+      console.log('[excalidraw-collab] init-room, joining', this.roomId)
       this.socket?.emit('join-room', this.roomId, { readOnly: this.readOnly })
     })
 
     this.socket.on('first-in-room', () => {
-      console.log('[collab] first in room')
+      console.log('[excalidraw-collab] first in room')
       this.socketInitialized = true
       this.onCollabStateChange?.('connected')
       this.broadcastIdleStatus()
@@ -280,14 +280,14 @@ export class CollabManager {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     this.socket.on('new-user', (_socketId: string) => {
-      console.log('[collab] new user joined, broadcasting full scene')
+      console.log('[excalidraw-collab] new user joined, broadcasting full scene')
       // Send full scene to the new user
       const elements = this.excalidrawAPI.getSceneElementsIncludingDeleted()
       this.broadcastScene(WS_SUBTYPES.INIT, elements, true)
     })
 
     this.socket.on('room-user-change', (clients: string[]) => {
-      console.log(`[collab] room users: ${clients.length} client(s)`)
+      console.log(`[excalidraw-collab] room users: ${clients.length} client(s)`)
       this.setCollaborators(clients)
       if (!this.socketInitialized) {
         this.socketInitialized = true
@@ -364,7 +364,7 @@ export class CollabManager {
   private handleRemoteBroadcast(rawData: ArrayBuffer | string) {
     const decoded = parseBroadcast(rawData)
     if (!decoded) {
-      console.error('[collab] failed to parse remote broadcast')
+      console.error('[excalidraw-collab] failed to parse remote broadcast')
       return
     }
 

@@ -28,7 +28,6 @@ export function useSceneLoader(
       loadFromBlob(blob, null, null)
         .then((data) => {
           if (data && excalidrawAPI) {
-            console.log('Loaded Excalidraw data:', data)
             excalidrawAPI.updateScene({
               elements: data.elements,
               appState: {
